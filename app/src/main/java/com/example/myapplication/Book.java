@@ -1,24 +1,37 @@
 package com.example.myapplication;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Book {
-    public UUID getId() {
+    private UUID mId;
+    private String mTitle;
+    private Date mDate;
+    private boolean mReaded;
+    public Book(){
+        mId = UUID.randomUUID();//Генерирование уникального индетификатора
+        mDate =new Date();
+
+    }
+    public Date getDate(){
+        return mDate;
+    }
+    public void setDate(Date date){
+        mDate = date;
+    }
+    public boolean isReaded(){
+        return mReaded;
+    }
+    public void setReaded(boolean readed){
+        mReaded = readed;
+    }
+    public UUID getId(){
         return mId;
     }
-
-    private UUID mId;
-
-    public String getTitle() {
+    public String getTitle(){
         return mTitle;
     }
-
-    public void setTitle(String title) {
+    public void setTitle(String title){
         mTitle = title;
-    }
-
-    private String mTitle;
-    public Book() {
-        mId = UUID.randomUUID(); //Генерирование уникального идентификатора
     }
 }
