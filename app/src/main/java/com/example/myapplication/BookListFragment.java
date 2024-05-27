@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import static com.example.myapplication.R.id.book_recycler_view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,24 @@ private BookAdapter mAdapter;
         updateUI();
         return view;
     }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        updateUI();
+    }
     private void updateUI() {
         BookLab bookLab = BookLab.get(getActivity());
         List<Book> books = bookLab.getBooks();
+        if (mAdapter == null){
+
+
         mAdapter = new BookAdapter(books) ;
            mBookRecyclerView.setAdapter(mAdapter);
+    }
+        else{
+            mAdapter.notifyDataSetChanged();
+        }
     }
     private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private Book mBook;
@@ -54,8 +68,8 @@ private BookAdapter mAdapter;
             mReadedCheckBox.setChecked(mBook.isReaded());
         }
             public void onClick (View v){
-            Toast.makeText(getActivity(), mBook.getTitle() + " clicked!", Toast.LENGTH_SHORT)
-                    .show();
+            Intent intent = MainActivity.newIntent(getActivity(), mBook.getId());
+            startActivity(intent);
         }
 
     }
