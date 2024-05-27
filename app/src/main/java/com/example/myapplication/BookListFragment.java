@@ -53,7 +53,6 @@ private BookAdapter mAdapter;
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mReadedCheckBox;
-
         public BookHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
@@ -68,10 +67,9 @@ private BookAdapter mAdapter;
             mReadedCheckBox.setChecked(mBook.isReaded());
         }
             public void onClick (View v){
-            Intent intent = MainActivity.newIntent(getActivity(), mBook.getId());
+            Intent intent = BookPagerActivity.newIntent(getActivity(), mBook.getId());
             startActivity(intent);
         }
-
     }
     private class BookAdapter extends RecyclerView.Adapter<BookHolder>{
         private List<Book> mBoooks;
@@ -87,13 +85,11 @@ private BookAdapter mAdapter;
         @Override
         public void onBindViewHolder(BookHolder holder, int position){
             Book book = mBoooks.get(position);
-
             holder.bindBook(book);
         }
         @Override
         public int getItemCount(){
             return  mBoooks.size();
         }
-
     }
 }
